@@ -1,0 +1,64 @@
+Write a program to implement quick sort?
+
+Quick sort is a divide and conquer algorithm.
+It picks an element as a pivot and partitions the given array around the pivot.
+The main process in quick sort is a partition().
+
+Algorithm::
+
+>>Take an array of size n
+>>Pick the pivot element p from the array.
+>>Then start from the leftmost element and keep track of the index of smaller elements as i.
+>> While traversing, if we find a smaller element, we swap the current element with arr[i]. 
+>>Otherwise, we ignore the current element. 
+
+>>The software used is Application software Using java.
+
+Program::
+import java.io.*;
+class GFG {
+	static void swap(int[] arr, int i, int j)
+	{
+		int temp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = temp;
+	}
+	static int partition(int[] arr, int low, int high)
+	{
+		// pivot
+		int pivot = arr[high];
+		int i = (low - 1);
+		for (int j = low; j <= high - 1; j++) {
+			if (arr[j] < pivot) {
+				i++;
+				swap(arr, i, j);
+			}
+		}
+		swap(arr, i + 1, high);
+		return (i + 1);
+	}
+	static void quickSort(int[] arr, int low, int high)
+	{
+		if (low < high) {
+			int pi = partition(arr, low, high);
+			quickSort(arr, low, pi - 1);
+			quickSort(arr, pi + 1, high);
+		}
+	}
+	static void printArray(int[] arr, int size)
+	{
+		for (int i = 0; i < size; i++)
+			System.out.print(arr[i] + " ");
+
+		System.out.println();
+	}
+	public static void main(String[] args)
+	{
+		int[] arr = { 10, 7, 8, 9, 1, 5 };
+		int n = arr.length;
+
+		quickSort(arr, 0, n - 1);
+		System.out.println("Sorted array: ");
+		printArray(arr, n);
+	}
+}
